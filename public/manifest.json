@@ -1,0 +1,17 @@
+{
+    "name": "Kawatuna",
+    "short_name": "LPT",
+    "start_url": ".",
+    "background_color": "#6777ef",
+    "description": "Kawatuna",
+    "display": "fullscreen",
+    "theme_color": "#6777ef",
+    "icons": [
+        {
+            "src": "img/icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
