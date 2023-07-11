@@ -36,15 +36,15 @@
      <li class="nav-item  {{ request()->is('cms/surat/masuk') ? 'active' : '' }}">
          <a class="nav-link " href="{{ url('cms/surat/masuk') }}" data-target="#collapsePage" aria-expanded="true"
              aria-controls="collapsePage">
-             <i class="fa-solid fa-calendar-days "></i>
+             <i class="fa-solid fa-download"></i>
              <span>Surat Masuk</span>
          </a>
      </li>
      <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
              aria-expanded="true" aria-controls="collapseBootstrap">
-             <i class="fa-solid fa-calendar-days "></i>
-             <span>Data Arsip</span>
+             <i class="fa-solid fa-box-archive"></i>
+             <span>Data Arsip Surat Masuk</span>
          </a>
          <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
              data-parent="#accordionSidebar">
@@ -54,18 +54,33 @@
              </div>
          </div>
      </li>
-
-     <!-- Logout -->
      <li class="nav-item">
-         <a class="nav-link" href="javascript:void(0);" id="logoutButton">
-             <i class="fas fa-sign-out-alt fa-fw"></i>
-             <span>Logout</span>
-         </a>
-     </li>
-     {{-- @endif --}}
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+            aria-expanded="true" aria-controls="collapseBootstrap">
+            <i class="fa-solid fa-box-archive"></i>
+            <span>Data Arsip Surat Keluar</span>
+        </a>
+        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Arsip Tahun</h6>
+                <div id="dropdownContents"></div> <!-- Tambahkan elemen ini -->
+            </div>
+        </div>
+    </li>
+
+  
 
 
      <hr class="sidebar-divider">
+        <!-- Logout -->
+        <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0);" id="logoutButton">
+                <i class="fas fa-sign-out-alt fa-fw"></i>
+                <span>Logout</span>
+            </a>
+        </li>
+        {{-- @endif --}}
 
  </ul>
 
@@ -110,6 +125,7 @@
                          '</a>';
                  });
                  $('#dropdownContent').html(dropdownContent);
+                 $('#dropdownContents').html(dropdownContent);
              },
              error: function(xhr, status, error) {
                  console.log(xhr.responseText);
