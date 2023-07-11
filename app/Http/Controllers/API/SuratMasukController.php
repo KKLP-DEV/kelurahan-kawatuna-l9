@@ -50,7 +50,7 @@ class SuratMasukController extends Controller
         $validation = Validator::make(
             $request->all(),
             [
-                'nomor_surat' => 'required',
+                'nomor_surat' => 'required|unique:tb_surat_masuk',
                 'tanggal_surat' => 'required|date',
                 'id_tahun' => 'required',
                 'id_jenis_surat' => 'required',
@@ -66,6 +66,7 @@ class SuratMasukController extends Controller
                 'file_surat.required' => 'Form file tidak boleh kosong',
                 'file_surat.mimes' => 'File harus dalam format pdf, jpg, atau jpeg',
                 'asal_surat.required' => 'Form asal surat tidak boleh kosong',
+                'nomor_surat.unique' => 'Surat surat ada sebelumnya'
             ]
         );
 
@@ -127,7 +128,7 @@ class SuratMasukController extends Controller
                     'message' => 'Data not found',
                 ]);
             } else {
-                $data->date = Carbon::createFromFormat('d F Y', $data->date)->format('Y-m-d');
+                $data->tanggal_surat = Carbon::createFromFormat('d F Y', $data->tanggal_surat)->format('Y-m-d');
                 return response()->json([
                     'code' => 200,
                     'message' => 'success get data by uuid',
@@ -137,7 +138,7 @@ class SuratMasukController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'code' => 400,
-                'message' => 'failed update',
+                'message' => 'failed ',
                 'errors' => $th->getMessage()
             ]);
         }
@@ -148,7 +149,7 @@ class SuratMasukController extends Controller
         $validation = Validator::make(
             $request->all(),
             [
-                'nomor_surat' => 'required',
+                'nomor_surat' => 'required|unique:tb_surat_masuk',
                 'tanggal_surat' => 'required|date',
                 'id_tahun' => 'required',
                 'id_jenis_surat' => 'required',
@@ -163,6 +164,7 @@ class SuratMasukController extends Controller
                 'id_jenis_surat.required' => 'Form Jenis surat tidak boleh kosong',
                 'file_surat.mimes' => 'File harus dalam format pdf, jpg, atau jpeg',
                 'asal_surat.required' => 'Form asal surat tidak boleh kosong',
+                'nomor_surat.unique' => 'Surat surat ada sebelumnya'
             ]
         );
 
@@ -201,5 +203,48 @@ class SuratMasukController extends Controller
                 'errors' => $th->getMessage()
             ]);
         }
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'success update data',
+            'data' => $data
+        ]);
+    }
+
+    public function deleteData($uuid)
+    {
+        if (!Uuid::isValid($uuid)) {
+            return response()->json([
+                'code' => 404,
+                'message' => 'UUID Invalid'
+            ]);
+        }
+
+        try {
+            $data = SuratMasukModel::where('uuid', $uuid)->first();
+            if (!$data) {
+                return response()->json([
+                    'code' => 404,
+                    'message' => 'Data not found'
+                ]);
+            }
+            $location = 'uploads/smasuk/' . $data->file_surat;
+            $data->delete();
+
+            if (File::exists($location)) {
+                File::delete($location);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'code' => 400,
+                'message' => 'failed delete data',
+                'errors' => $th->getMessage()
+            ]);
+        }
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'success delete data'
+        ]);
     }
 }
