@@ -110,35 +110,42 @@
                 <div class="modal-body">
                     <form id="formEdit" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <input type="hidden" name="uuid" id="uuid">
                         <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control" name="title" id="etitle"
+                            <label for="nomor_surat">Nomor Surat</label>
+                            <input type="text" class="form-control" name="nomor_surat" id="enomor_surat"
                                 placeholder="Input Here..">
                         </div>
                         <div class="form-group">
-                            <label for="image_scholarship">Image</label>
+                            <label for="tanggal_surat">Tanggal Surat</label>
+                            <input type="date" class="form-control" name="tanggal_surat" id="etanggal_surat"
+                                placeholder="Input Here">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_tahun">Tahun Arsip</label>
+                            <select name="id_tahun" id="eid_tahun" class="form-control">
+                                <option value="">-- Pilih --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_jenis_surat">Jenis Surat</label>
+                            <select name="id_jenis_surat" id="eid_jenis_surat" class="form-control">
+                                <option value="">-- Pilih --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="file_surat">File</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="eimage_scholarship"
-                                    name="image_scholarship">
-                                <label class="custom-file-label" for="eimage_scholarship"
-                                    id="eimage_scholarship-label">Image</label>
+                                <input type="file" class="custom-file-input" id="efile_surat" name="file_surat">
+                                <label class="custom-file-label" for="efile_surat" id="efile_surat-label">File </label>
+                                <p>Format: Jpg,jpeg,png,doc,docx,xls</p>
                             </div>
                             <img src="" alt="" id="preview" class="mx-auto d-block pb-2"
                                 style="max-width: 200px; padding-top: 23px">
                         </div>
                         <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" id="edescription" name="description" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="posting_date">Posting Date</label>
-                            <input type="date" class="form-control" name="posting_date" id="eposting_date">
-                        </div>
-                        <div class="form-group">
-                            <label for="link"> Link</label>
-                            <input type="text" class="form-control" name="link" id="elink"
+                            <label for="asal_surat"> Asal Surat</label>
+                            <input type="text" class="form-control" name="asal_surat" id="easal_surat"
                                 placeholder="Input Here">
                         </div>
 
@@ -180,9 +187,13 @@
                         tableBody += "</td>";
                         tableBody += "<td>" + item.asal_surat + "</td>";
                         tableBody += "<td>" +
-                            `<a href="{{ url('cms/backend/edit/news') }}/${item.uuid}" class="btn btn-primary" role="button"><i class="fa fa-edit"></i></a>` +
-                            `<button type="button" class="btn btn-danger delete-confirm" data-uuid="${item.uuid}"><i class="fa fa-trash"></i></button>` +
+                            "<button type='button' class='btn btn-primary edit-modal' data-toggle='modal' data-target='#EditModal' " +
+                            "data-uuid='" + item.uuid + "' " +
+                            "<i class='fa fa-edit'>Edit</i></button>" +
+                            "<button type='button' class='btn btn-danger delete-confirm' data-uuid='" +
+                            item.uuid + "'><i class='fa fa-trash'></i></button>" +
                             "</td>";
+
                         tableBody += "</tr>";
                     });
                     $('#dataTable').DataTable().destroy();
@@ -214,6 +225,7 @@
                         '">' + item.tahun + '</option>';
                 });
                 $('#id_tahun').append(options);
+                $('#eid_tahun').append(options);
 
             },
             error: function() {
@@ -234,6 +246,7 @@
                         '">' + item.jenis_surat + '</option>';
                 });
                 $('#id_jenis_surat').append(options);
+                $('#eid_jenis_surat').append(options);
 
             },
             error: function() {
@@ -321,28 +334,29 @@
         $(document).on('click', '.edit-modal', function() {
             var uuid = $(this).data('uuid');
             // Menampilkan nama file gambar saat dipilih
-            $(document).on('change', '#eimage_scholarship', function() {
+            $(document).on('change', '#efile_surat', function() {
                 var fileName = $(this).val().split('\\').pop();
-                $('#eimage_scholarship-label').text(fileName);
+                $('#efile_surat-label').text(fileName);
             });
 
             $.ajax({
-                url: "{{ url('v9/396d6585-16ae-4d04-9549-c499e52b75ea/scholarship') }}/" + uuid,
+                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/get') }}/" + uuid,
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
-                    console.log(data);
+                    console.log('response get data by uuid =>>', data);
                     $('#uuid').val(data.data.uuid);
-                    $('#etitle').val(stripHtmlTags(data.data.title));
-                    $('#eimage_scholarship').html(data.data.image_scholarship);
-                    $('#preview').attr('src', "{{ asset('uploads/scholarship') }}/" + data.data
-                        .image_scholarship);
-                    $('#edescription').val(stripHtmlTags(data.data.description));
-                    $('#eposting_date').val(data.data.posting_date);
-                    $('#elink').val(stripHtmlTags(data.data.link));
+                    $('#enomor_surat').val(stripHtmlTags(data.data.nomor_surat));
+                    $('#etanggal_surat').val((data.data.tanggal_surat));
+                    $('#efile_surat').html(data.data.file_surat);
+                    $('#preview').attr('src', "{{ asset('uploads/smasuk') }}/" + data.data
+                        .file_surat);
+                    $('#eid_jenis_surat').val(stripHtmlTags(data.data.id_jenis_surat));
+                    $('#eid_tahun').val(data.data.id_tahun);
+                    $('#easal_surat').val(stripHtmlTags(data.data.asal_surat));
                     // Tampilkan nama file gambar pada label
-                    var fileName = data.data.image_scholarship.split('/').pop();
-                    $('#eimage_scholarship-label').text(fileName);
+                    var fileName = data.data.file_surat.split('/').pop();
+                    $('#efile_surat-label').text(fileName);
                     $('#EditModal').modal('show');
                 },
                 error: function() {
@@ -368,17 +382,17 @@
                 var formData = new FormData(this);
                 // Tampilkan loader
 
-                var file = $('#eimage_scholarship')[0].files[0];
+                var file = $('#efile_surat')[0].files[0];
                 if (!file) {
-                    formData.delete('image_scholarship');
+                    formData.delete('file_surat');
                 }
                 $('#loading-overlay').show();
-                var selectedDate = moment($('#eposting_date').val(), 'YYYY-MM-DD').format('DD MMMM YYYY');
-                formData.set('posting_date', selectedDate);
+                var selectedDate = moment($('#etanggal_surat').val(), 'YYYY-MM-DD').format('DD MMMM YYYY');
+                formData.set('tanggal_surat', selectedDate);
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('v9/396d6585-16ae-4d04-9549-c499e52b75ea/scholarship/update/') }}/" +
+                    url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/update') }}/" +
                         uuid,
                     data: formData,
                     dataType: 'json',
@@ -451,7 +465,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ url('v9/96d6585-16ae-4d04-9549-c499e52b75ea/scholarship/delete/') }}/" +
+                        url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/delete') }}/" +
                             uuid,
                         type: 'DELETE',
                         data: {
