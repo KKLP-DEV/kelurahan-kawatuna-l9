@@ -8,10 +8,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- PWA  -->
-    <meta name="theme-color" content="#6777ef" />
-    <link rel="apple-touch-icon" href="{{ asset('/public/img/icon.png') }}">
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
@@ -79,7 +75,7 @@
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>
-                        </span>
+                        </span>   
                     </div>
                 </div>
             </footer>
@@ -97,14 +93,7 @@
     @yield('js')
     @include('sweetalert::alert')
 
-    <script src="{{ asset('sw.js') }}"></script>
-    <script>
-        if (!navigator.serviceWorker.controller) {
-            navigator.serviceWorker.register("/sw.js").then(function(reg) {
-                console.log("Service worker has been registered for scope: " + reg.scope);
-            });
-        }
-    </script>
+
 
 </body>
 
