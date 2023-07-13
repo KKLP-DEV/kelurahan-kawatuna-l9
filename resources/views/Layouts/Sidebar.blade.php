@@ -18,7 +18,7 @@
      <div class="sidebar-heading">
          Data
      </div>
-     {{-- @if (auth()->user()->level == 'Super Admin') --}}
+     @if (auth()->user()->role == 1)
      <li class="nav-item  {{ request()->is('cms/tahun') ? 'active' : '' }}">
          <a class="nav-link " href="{{ url('cms/tahun') }}" data-target="#collapsePage" aria-expanded="true"
              aria-controls="collapsePage">
@@ -29,10 +29,11 @@
      <li class="nav-item  {{ request()->is('cms/jenis/surat') ? 'active' : '' }}">
         <a class="nav-link " href="{{ url('cms/jenis/surat') }}" data-target="#collapsePage" aria-expanded="true"
             aria-controls="collapsePage">
-            <i class="fa-solid fa-calendar-days "></i>
+            <i class="fa-sharp fa-solid fa-filter"></i>
             <span>Jenis Surat</span>
         </a>
     </li>
+    @endif
      <li class="nav-item  {{ request()->is('cms/surat/masuk') ? 'active' : '' }}">
          <a class="nav-link " href="{{ url('cms/surat/masuk') }}" data-target="#collapsePage" aria-expanded="true"
              aria-controls="collapsePage">
@@ -41,37 +42,35 @@
          </a>
      </li>
      <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-             aria-expanded="true" aria-controls="collapseBootstrap">
-             <i class="fa-solid fa-box-archive"></i>
-             <span>Data Arsip Surat Masuk</span>
-         </a>
-         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
-             data-parent="#accordionSidebar">
-             <div class="bg-white py-2 collapse-inner rounded">
-                 <h6 class="collapse-header">Arsip Tahun</h6>
-                 <div id="dropdownContent"></div> <!-- Tambahkan elemen ini -->
-             </div>
-         </div>
-     </li>
-     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-            aria-expanded="true" aria-controls="collapseBootstrap">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSuratMasuk"
+            aria-expanded="false" aria-controls="collapseSuratMasuk">
             <i class="fa-solid fa-box-archive"></i>
-            <span>Data Arsip Surat Keluar</span>
+            <span>Data Arsip Surat Masuk</span>
         </a>
-        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
+        <div id="collapseSuratMasuk" class="collapse" aria-labelledby="headingSuratMasuk"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Arsip Tahun</h6>
-                <div id="dropdownContents"></div> <!-- Tambahkan elemen ini -->
+                <div id="dropdownContent"></div> 
             </div>
         </div>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSuratKeluar"
+            aria-expanded="false" aria-controls="collapseSuratKeluar">
+            <i class="fa-solid fa-box-archive"></i>
+            <span>Data Arsip Surat Keluar</span>
+        </a>
+        <div id="collapseSuratKeluar" class="collapse" aria-labelledby="headingSuratKeluar"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Arsip Tahun</h6>
+                <div id="dropdownContents"></div> 
+            </div>
+        </div>
+    </li>
+    
   
-
-
      <hr class="sidebar-divider">
         <!-- Logout -->
         <li class="nav-item">
