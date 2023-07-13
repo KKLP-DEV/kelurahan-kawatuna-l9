@@ -21,6 +21,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
+                                    <th>Yang mengupload</th>
                                     <th>Nomor Surat</th>
                                     <th>Tanggal Surat</th>
                                     <th>Tahun Arsip</th>
@@ -171,12 +172,13 @@
                 method: "GET",
                 dataType: "json",
                 success: function(response) {
-                    $('#loading-overlay').hide();
                     console.log(response);
+                    $('#loading-overlay').hide();
                     var tableBody = "";
                     $.each(response.data, function(index, item) {
                         tableBody += "<tr>";
                         tableBody += "<td>" + (index + 1) + "</td>";
+                        tableBody += "<td>" + item.users.name + "</td>";
                         tableBody += "<td>" + item.nomor_surat + "</td>";
                         tableBody += "<td>" + item.tanggal_surat + "</td>";
                         tableBody += "<td>" + item.tahun.tahun + "</td>";
@@ -239,7 +241,6 @@
             method: "GET",
             dataType: "json",
             success: function(response) {
-                console.log(response);
                 var options = '';
                 $.each(response.data, function(index, item) {
                     options += '<option value="' + item.id +
@@ -296,7 +297,6 @@
                                 showConfirmButton: true
                             });
                         } else {
-                            console.log(data);
                             Swal.fire({
                                 title: 'Success',
                                 text: 'Data Success Create',
@@ -344,7 +344,6 @@
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
-                    console.log('response get data by uuid =>>', data);
                     $('#uuid').val(data.data.uuid);
                     $('#enomor_surat').val(stripHtmlTags(data.data.nomor_surat));
                     $('#etanggal_surat').val((data.data.tanggal_surat));
@@ -399,7 +398,6 @@
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                        console.log(data);
                         $('#loading-overlay').hide();
                         if (data.message === 'check your validation') {
                             var error = data.errors;
@@ -417,7 +415,6 @@
                                 showConfirmButton: true
                             });
                         } else {
-                            console.log(data);
                             $('#loading-overlay').hide();
                             Swal.fire({
                                 title: 'Success',
@@ -473,7 +470,6 @@
                             "uuid": uuid
                         },
                         success: function(response) {
-                            console.log(response);
                             if (response.code === 200) {
                                 Swal.fire({
                                     title: 'Data berhasil dihapus',
