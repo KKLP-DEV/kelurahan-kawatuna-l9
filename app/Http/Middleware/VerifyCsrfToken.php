@@ -13,5 +13,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        'v4/396d6585-16ae-4d04-9549-c499e52b75ea/auth/register',
+        'v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/create',
+        'v4/396d6585-16ae-4d04-9549-c499e52b75ea/auth/login'
     ];
 }
