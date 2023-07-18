@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\JenisSuratController;
+use App\Http\Controllers\API\SuratKeluarController;
 use App\Http\Controllers\API\SuratMasukController;
 use App\Http\Controllers\API\TahunController;
 use App\Models\JenisDokumenModel;
@@ -51,6 +52,10 @@ Route::middleware('web', 'auth')->group(function () {
         return view('backend.arsip-surat-masuk');
     });
 
+    Route::get('/cms/surat/keluar', function () {
+        return view('backend.surat-keluar');
+    });
+
 
 
     //tahun arsip
@@ -81,6 +86,16 @@ Route::middleware('web', 'auth')->group(function () {
         Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/get/{uuid}', 'getDataByUuid');
         Route::post('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/update/{uuid}', 'updateDataByUuid');
         Route::delete('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/delete/{uuid}', 'deleteData');
+    });
+
+    Route::prefix('v4')->controller(SuratKeluarController::class)->group(function () {
+        Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar', 'getAllData');
+        Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/user/{id_tahun}/{id_jenis_surat}', 'getDataByUser');
+        // Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/get/{id_tahun}/{id_jenis_surat}', 'getDataByTahunAndJenisSurat');
+        Route::post('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/create', 'createData');
+        Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/get/{uuid}', 'getDataByUuid');
+        Route::post('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/update/{uuid}', 'updateDataByUuid');
+        Route::delete('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/delete/{uuid}', 'deleteData');
     });
 });
 
