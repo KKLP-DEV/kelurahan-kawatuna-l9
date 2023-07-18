@@ -41,6 +41,13 @@
              <span>Surat Masuk</span>
          </a>
      </li>
+     <li class="nav-item  {{ request()->is('cms/surat/keluar') ? 'active' : '' }}">
+        <a class="nav-link " href="{{ url('cms/surat/keluar') }}" data-target="#collapsePage" aria-expanded="true"
+            aria-controls="collapsePage">
+            <i class="fa-solid fa-upload"></i>
+            <span>Surat Keluar</span>
+        </a>
+    </li>
      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSuratMasuk"
             aria-expanded="false" aria-controls="collapseSuratMasuk">
