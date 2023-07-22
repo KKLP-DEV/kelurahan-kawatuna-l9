@@ -340,7 +340,7 @@
             });
 
             $.ajax({
-                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/get') }}/" + uuid,
+                url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/get') }}/" + uuid,
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
@@ -348,11 +348,11 @@
                     $('#enomor_surat').val(stripHtmlTags(data.data.nomor_surat));
                     $('#etanggal_surat').val((data.data.tanggal_surat));
                     $('#efile_surat').html(data.data.file_surat);
-                    $('#preview').attr('src', "{{ asset('uploads/smasuk') }}/" + data.data
+                    $('#preview').attr('src', "{{ asset('uploads/skeluar') }}/" + data.data
                         .file_surat);
                     $('#eid_jenis_surat').val(stripHtmlTags(data.data.id_jenis_surat));
                     $('#eid_tahun').val(data.data.id_tahun);
-                    $('#easal_surat').val(stripHtmlTags(data.data.tujuan_surat));
+                    $('#etujuan_surat').val(stripHtmlTags(data.data.tujuan_surat));
                     // Tampilkan nama file gambar pada label
                     var fileName = data.data.file_surat.split('/').pop();
                     $('#efile_surat-label').text(fileName);
@@ -391,7 +391,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/update') }}/" +
+                    url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/update') }}/" +
                         uuid,
                     data: formData,
                     dataType: 'json',
