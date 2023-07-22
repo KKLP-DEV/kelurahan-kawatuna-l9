@@ -42,32 +42,39 @@ class SuratMasukController extends Controller
 
     public function getDataByUser($id_tahun, $id_jenis_surat)
     {
-        $user = Auth::user();
-
-        if ($user->role == 2) {
-            $data = SuratMasukModel::with('tahun', 'jenis_surat', 'users')
-                ->where('id_tahun', $id_tahun)
-                ->where('id_jenis_surat', $id_jenis_surat)
-                ->where('id_user', $user->id)
-                ->get();
-
+        try {
+            $user = Auth::user();
+            if ($user->role == 2) {
+                $data = SuratMasukModel::with('tahun', 'jenis_surat', 'users')
+                    ->where('id_tahun', $id_tahun)
+                    ->where('id_jenis_surat', $id_jenis_surat)
+                    ->where('id_user', $user->id)
+                    ->get();
+    
+                return response()->json([
+                    'code' => 200,
+                    'message' => 'success get data user',
+                    'data' => $data
+                ]);
+            } elseif ($user->role == 1) {
+                $admin = SuratMasukModel::with('tahun', 'jenis_surat', 'users')
+                    ->where('id_tahun', $id_tahun)
+                    ->where('id_jenis_surat', $id_jenis_surat)
+                    ->get();
+    
+                return response()->json([
+                    'code' => 200,
+                    'message' => 'success get data',
+                    'data' => $admin
+                ]);
+            }
+        } catch (\Throwable $th) {
             return response()->json([
-                'code' => 200,
-                'message' => 'success get data',
-                'data' => $data
-            ]);
-        } elseif ($user->role == 1) {
-            $admin = SuratMasukModel::with('tahun', 'jenis_surat', 'users')
-                ->where('id_tahun', $id_tahun)
-                ->where('id_jenis_surat', $id_jenis_surat)
-                ->get();
-
-            return response()->json([
-                'code' => 200,
-                'message' => 'success get data',
-                'data' => $admin
+                'errors' =>$th->getMessage()
             ]);
         }
+
+      
     }
 
 
@@ -178,7 +185,7 @@ class SuratMasukController extends Controller
         $validation = Validator::make(
             $request->all(),
             [
-                'nomor_surat' => 'required|unique:tb_surat_masuk',
+                'nomor_surat' => 'required',
                 'tanggal_surat' => 'required|date',
                 'id_tahun' => 'required',
                 'id_jenis_surat' => 'required',
@@ -193,7 +200,6 @@ class SuratMasukController extends Controller
                 'id_jenis_surat.required' => 'Form Jenis surat tidak boleh kosong',
                 'file_surat.mimes' => 'File harus dalam format pdf, jpg, atau jpeg',
                 'asal_surat.required' => 'Form asal surat tidak boleh kosong',
-                'nomor_surat.unique' => 'Surat surat ada sebelumnya'
             ]
         );
 
@@ -206,7 +212,9 @@ class SuratMasukController extends Controller
         }
 
         try {
+            $user = Auth::user();
             $data = SuratMasukModel::where('uuid', $uuid)->first();
+            $data->id_user =  $user->id;
             $data->nomor_surat = $request->input('nomor_surat');
             $data->tanggal_surat = $request->input('tanggal_surat');
             $data->id_tahun = $request->input('id_tahun');
