@@ -123,8 +123,8 @@
 
         $(document).ready(function() {
             var url = new URL(window.location.href);
-            var id_tahun = url.pathname.split('/')[3];
-            var id_jenis_surat = url.pathname.split('/')[4];
+            var id_tahun = url.pathname.split('/')[7];
+            var id_jenis_surat = url.pathname.split('/')[8];
             // Tampilkan loader
             $('#loading-overlay').show();
             $.ajax({
@@ -134,7 +134,7 @@
                 dataType: "json",
                 success: function(response) {
                     $('#loading-overlay').hide();
-                    console.log(response);
+                    console.log('surat masuk => ' , response);
                     var tableBody = "";
                     $.each(response.data, function(index, item) {
                         tableBody += "<tr>";
