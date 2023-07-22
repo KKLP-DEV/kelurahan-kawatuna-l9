@@ -45,11 +45,18 @@ Route::middleware('web', 'auth')->group(function () {
         return view('backend.jenis-surat');
     });
 
-    Route::get('/cms/arsip/{uuid}', function () {
+    Route::get('/cms/arsip/surat/masuk/get/{id}', function () {
         return view('backend.arsip');
     });
-    Route::get('/cms/arsip/{id_tahun}/{id_jenis_surat}', function () {
+    Route::get('/cms/arsip/surat/masuk/get/data/{id_tahun}/{id_jenis_surat}', function () {
         return view('backend.arsip-surat-masuk');
+    });
+
+    Route::get('/cms/arsip/surat/keluar/get/{uuid}', function () {
+        return view('backend.arsip2');
+    });
+    Route::get('/cms/arsip/surat/keluar/get/data/{id_tahun}/{id_jenis_surat}', function () {
+        return view('backend.arsip-surat-keluar');
     });
 
     Route::get('/cms/surat/keluar', function () {
