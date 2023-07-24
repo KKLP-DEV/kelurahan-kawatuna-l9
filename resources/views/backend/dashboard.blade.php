@@ -3,13 +3,13 @@
 @section('content')
     <div class="row mb-3">
         <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-4 col-md-4 mb-4 ">
+        <div class="col-xl-6 col-md-6 mb-4 ">
             <div class="card h-100">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Data Surat Masuk</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="author"> 500</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="suratMasuk"> </div>
                             <div class="mt-2 mb-0 text-muted text-xs">
                                 <span class="text-success mr-2"><i class="fas fa-arrow-down"></i> </span>
                                 <span>Detail</span>
@@ -22,13 +22,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-md-4 mb-4 ">
+        <div class="col-xl-6 col-md-6 mb-4 ">
             <div class="card h-100">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Data Surat Keluar</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="news"></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="suratKeluar"></div>
                             <div class="mt-2 mb-0 text-muted text-xs">
                                 <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i></span>
                                 <span>Detail</span>
@@ -41,28 +41,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-md-4 mb-4 ">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Admin</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                            <div class="mt-2 mb-0 text-muted text-xs">
-                                <span class="text-danger mr-2"><i class="fa-solid fa-users"></i></span>
-                                <a href="/data-admin"><span>Detail</span></a>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa-solid fa-users fa-2x text-info"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
         <div class="col-lg-12 mb-4 order-0">
             <div class="card">
                 <div class="d-flex align-items-end row">
@@ -89,12 +67,12 @@
         $(document).ready(function() {
             $.ajax({
                 type: "get",
-                url: "{{ url('v3/total/author/news') }}",
+                url: "{{ url('dashboard/get/count') }}",
                 dataType: "json",
                 success: function(response) {
                     console.log(response);
-                    $('#author').text(response.data.totalAuthor);
-                    $('#news').html(response.data.totalnews);
+                    $('#suratMasuk').text(response.data.suratMasuk);
+                    $('#suratKeluar').html(response.data.suratKeluar);
                 }
             });
         });
