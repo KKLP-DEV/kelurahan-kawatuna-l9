@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 
 class SuratKeluarController extends Controller
 {
@@ -242,6 +243,43 @@ class SuratKeluarController extends Controller
                 'data' => $admin
             ]);
         }
+    }
+
+    public function deleteData($uuid)
+    {
+        if (!Uuid::isValid($uuid)) {
+            return response()->json([
+                'code' => 404,
+                'message' => 'UUID Invalid'
+            ]);
+        }
+
+        try {
+            $data = SuratKeluarModel::where('uuid', $uuid)->first();
+            if (!$data) {
+                return response()->json([
+                    'code' => 404,
+                    'message' => 'Data not found'
+                ]);
+            }
+            $location = 'uploads/smasuk/' . $data->file_surat;
+            $data->delete();
+
+            if (File::exists($location)) {
+                File::delete($location);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'code' => 400,
+                'message' => 'failed delete data',
+                'errors' => $th->getMessage()
+            ]);
+        }
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'success delete data'
+        ]);
     }
 
 }
