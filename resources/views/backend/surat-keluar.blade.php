@@ -103,7 +103,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="EditModalLabel">Edit Scholarship</h5>
+                    <h5 class="modal-title" id="EditModalLabel">Edit Modal</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -462,7 +462,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/delete') }}/" +
+                        url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/delete') }}/" +
                             uuid,
                         type: 'DELETE',
                         data: {
