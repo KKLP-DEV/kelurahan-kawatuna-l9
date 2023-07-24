@@ -43,7 +43,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="EditModalLabel">Edit Scholarship</h5>
+                    <h5 class="modal-title" id="EditModalLabel">Edit Modal</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -85,8 +85,8 @@
                                 style="max-width: 200px; padding-top: 23px">
                         </div>
                         <div class="form-group">
-                            <label for="asal_surat"> Asal Surat</label>
-                            <input type="text" class="form-control" name="asal_surat" id="easal_surat"
+                            <label for="tujuan_surat"> Tujuan Surat</label>
+                            <input type="text" class="form-control" name="tujuan_surat" id="etujuan_surat"
                                 placeholder="Input Here">
                         </div>
 
@@ -227,7 +227,7 @@
             });
 
             $.ajax({
-                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/get') }}/" + uuid,
+                url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/get') }}/" + uuid,
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
@@ -240,7 +240,7 @@
                         .file_surat);
                     $('#eid_jenis_surat').val(stripHtmlTags(data.data.id_jenis_surat));
                     $('#eid_tahun').val(data.data.id_tahun);
-                    $('#easal_surat').val(stripHtmlTags(data.data.asal_surat));
+                    $('#etujuan_surat').val(stripHtmlTags(data.data.tujuan_surat));
                     // Tampilkan nama file gambar pada label
                     var fileName = data.data.file_surat.split('/').pop();
                     $('#efile_surat-label').text(fileName);
@@ -281,7 +281,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/update') }}/" +
+                    url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/update') }}/" +
                         uuid,
                     data: formData,
                     dataType: 'json',
@@ -354,7 +354,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/delete') }}/" +
+                        url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/delete') }}/" +
                             uuid,
                         type: 'DELETE',
                         data: {
