@@ -96,7 +96,7 @@
          $('#logoutButton').click(function(e) {
              e.preventDefault();
              $.ajax({
-                 url: '/logout',
+                 url: '{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/auth/logout') }}',
                  method: 'POST',
                  dataType: 'json',
                  headers: {
