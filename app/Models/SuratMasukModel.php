@@ -10,7 +10,7 @@ class SuratMasukModel extends Model
     use HasFactory;
     protected $table = 'tb_surat_masuk';
     protected $fillable = [
-        'id', 'uuid','id_user', 'nomor_surat', 'tanggal_surat', 'id_tahun', 'id_jenis_surat', 'file_surat', 'asal_surat', 'created_at', 'updated_at'
+        'id', 'uuid','id_user', 'nomor_surat', 'tanggal_surat', 'id_tahun', 'id_jenis_surat', 'file_surat', 'asal_surat','perihal', 'created_at', 'updated_at'
     ];
 
     public function tahun()
