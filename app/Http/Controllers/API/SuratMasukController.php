@@ -89,7 +89,8 @@ class SuratMasukController extends Controller
                 'id_tahun' => 'required',
                 'id_jenis_surat' => 'required',
                 'file_surat' => 'required|mimes:pdf,jpg,jpeg,png,doc,docx,xls',
-                'asal_surat' => 'required'
+                'asal_surat' => 'required',
+                'perihal' => 'required'
             ],
             [
                 'nomor_surat.required' => 'Form nomor surat tidak boleh kosong',
@@ -100,7 +101,8 @@ class SuratMasukController extends Controller
                 'file_surat.required' => 'Form file tidak boleh kosong',
                 'file_surat.mimes' => 'File harus dalam format pdf, jpg, atau jpeg',
                 'asal_surat.required' => 'Form asal surat tidak boleh kosong',
-                'nomor_surat.unique' => 'Nomor surat sudah ada sebelumnya'
+                'nomor_surat.unique' => 'Nomor surat sudah ada sebelumnya',
+                'perihal.required' => 'Form perihal tidak boleh kosong'
             ]
         );
 
@@ -131,6 +133,7 @@ class SuratMasukController extends Controller
                 $data->file_surat = $filename;
             }
             $data->asal_surat = $request->input('asal_surat');
+            $data->perihal = $request->input('perihal');
             $data->save();
         } catch (\Throwable $th) {
             return response()->json([
@@ -190,7 +193,8 @@ class SuratMasukController extends Controller
                 'id_tahun' => 'required',
                 'id_jenis_surat' => 'required',
                 'file_surat' => 'mimes:pdf,jpg,jpeg,png,doc,docx,xls',
-                'asal_surat' => 'required'
+                'asal_surat' => 'required',
+                'perihal' => 'required'
             ],
             [
                 'nomor_surat.required' => 'Form nomor surat tidak boleh kosong',
@@ -200,6 +204,7 @@ class SuratMasukController extends Controller
                 'id_jenis_surat.required' => 'Form Jenis surat tidak boleh kosong',
                 'file_surat.mimes' => 'File harus dalam format pdf, jpg, atau jpeg',
                 'asal_surat.required' => 'Form asal surat tidak boleh kosong',
+                'perihal.required' => 'Form perihal tidak boleh kosong'
             ]
         );
 
@@ -232,6 +237,7 @@ class SuratMasukController extends Controller
                 $data->file_surat = $filename;
             }
             $data->asal_surat = $request->input('asal_surat');
+            $data->perihal = $request->input('perihal');
             $data->save();
         } catch (\Throwable $th) {
             return response()->json([
