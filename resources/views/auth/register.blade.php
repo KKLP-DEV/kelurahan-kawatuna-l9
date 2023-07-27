@@ -1,5 +1,40 @@
 @extends('Layouts.loginBase')
 @section('content')
+    <style>
+        /* Add the CSS for the loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: none;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .loading img {
+            max-width: 100px;
+        }
+
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div id="loading" class="loading">
+            <img src="{{ asset('img/loader.gif') }}" alt="Loading..." />
+        </div>
+    </div>
     <div class="login-card">
         <img src="{{ asset('img/logo1.png') }}" style="max-width: 150px" alt=""><br><br><br>
         <div id="error-message" class="error-message"></div>
@@ -23,12 +58,6 @@
         </form>
     </div>
 
-    <style>
-        .error-message {
-            color: red;
-            margin-bottom: 10px;
-        }
-    </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
@@ -40,8 +69,11 @@
                 var password = $('#password').val();
                 var password_confirmation = $('#password_confirmation').val();
 
+                // Show the loading overlay
+                $('#loading-overlay').show();
+
                 $.ajax({
-                    url: '{{ url('v6/396d6585-16ae-4d04-9549-c499e52b75ea/admin/create') }}',
+                    url: '{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/auth/register') }}',
                     type: 'POST',
                     data: {
                         name: name,
@@ -51,8 +83,9 @@
                         _token: $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(data) {
+                        $('#loading-overlay').hide();
                         console.log(data);
-                        if (data.code === 422) {
+                        if (data.code === 400) {
                             var error = data.errors;
                             var errorMessage = "";
 
@@ -67,28 +100,23 @@
                                 timer: 5000,
                                 showConfirmButton: true
                             });
-                        } else if (data.code === 400) {
-                            Swal.fire({
-                                title: 'Error',
-                                text: 'email sudah terdaftar',
-                                icon: 'error',
-                                timer: 5000,
-                                showConfirmButton: true
-                            });
+
                         } else {
+                            $('#loading-overlay').hide();
                             console.log(data);
                             Swal.fire({
                                 title: 'Success',
-                                text: 'Data Success Create',
+                                text: 'Registrasi sukses silahkan check email anda',
                                 icon: 'success',
                                 showCancelButton: false,
                                 confirmButtonText: 'OK'
                             }).then(function() {
-                                location.reload();
+                                window.location.href = '/login';
                             });
                         }
                     },
                     error: function(data) {
+                        $('#loading-overlay').hide();
                         var error = data.responseJSON.errors;
                         var errorMessage = "";
 
