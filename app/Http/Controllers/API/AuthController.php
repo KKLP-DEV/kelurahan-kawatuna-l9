@@ -155,4 +155,13 @@ class AuthController extends Controller
         // Periksa apakah waktu pembuatan token ditambah dengan waktu kedaluwarsa masih lebih besar dari waktu saat ini
         return $token->accessToken->created_at->addMinutes($expirationMinutes)->isFuture();
     }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            'code' => 200,
+            'message' => 'sucess logout and delete token access'
+        ]);
+    }
 }
