@@ -23,11 +23,12 @@
                                     <th>No</th>
                                     <th>Yang mengupload</th>
                                     <th>Nomor Surat</th>
-                                    <th>Tanggal Surat</th>
+                                    <th>Tanggal Surat Keluar</th>
                                     <th>Tahun Arsip</th>
                                     <th>Jenis Surat</th>
                                     <th>File</th>
                                     <th>Tujuan surat</th>
+                                    <th>Perihal</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -61,7 +62,7 @@
                                 placeholder="Input Here..">
                         </div>
                         <div class="form-group">
-                            <label for="tanggal_surat">Tanggal Surat</label>
+                            <label for="tanggal_surat">Tanggal Surat Keluar</label>
                             <input type="date" class="form-control" name="tanggal_surat" id="tanggal_surat"
                                 placeholder="Input Here">
                         </div>
@@ -86,6 +87,11 @@
                             <label for="tujuan_surat"> Tujuan Surat</label>
                             <input type="text" class="form-control" name="tujuan_surat" id="tujuan_surat"
                                 placeholder="Input Here">
+                        </div>
+                        <div class="form-group">
+                            <label for="perihal"> Perihal</label>
+                            <textarea type="text" class="form-control" name="perihal" id="perihal"
+                                placeholder="Input Here" rows="3"> </textarea>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -118,7 +124,7 @@
                                 placeholder="Input Here..">
                         </div>
                         <div class="form-group">
-                            <label for="tanggal_surat">Tanggal Surat</label>
+                            <label for="tanggal_surat">Tanggal Surat Keluar</label>
                             <input type="date" class="form-control" name="tanggal_surat" id="etanggal_surat"
                                 placeholder="Input Here">
                         </div>
@@ -148,6 +154,11 @@
                             <label for="tujuan_surat"> Tujuan Surat</label>
                             <input type="text" class="form-control" name="tujuan_surat" id="etujuan_surat"
                                 placeholder="Input Here">
+                        </div>
+                        <div class="form-group">
+                            <label for="perihal"> Perihal</label>
+                            <textarea type="text" class="form-control" name="perihal" id="eperihal"
+                                placeholder="Input Here" rows="3"> </textarea>
                         </div>
 
                     </form>
@@ -188,6 +199,7 @@
                             `<a href="/uploads/skeluar/${item.file_surat}"class="btn btn-primary" target="_blank"><i class="fa fa-eye"></i></a>`;
                         tableBody += "</td>";
                         tableBody += "<td>" + item.tujuan_surat+ "</td>";
+                        tableBody += "<td>" + item.perihal+ "</td>";
                         tableBody += "<td>" +
                             "<button type='button' class='btn btn-primary edit-modal' data-toggle='modal' data-target='#EditModal' " +
                             "data-uuid='" + item.uuid + "' " +
@@ -353,6 +365,7 @@
                     $('#eid_jenis_surat').val(stripHtmlTags(data.data.id_jenis_surat));
                     $('#eid_tahun').val(data.data.id_tahun);
                     $('#etujuan_surat').val(stripHtmlTags(data.data.tujuan_surat));
+                    $('#eperihal').val(stripHtmlTags(data.data.perihal));
                     // Tampilkan nama file gambar pada label
                     var fileName = data.data.file_surat.split('/').pop();
                     $('#efile_surat-label').text(fileName);
