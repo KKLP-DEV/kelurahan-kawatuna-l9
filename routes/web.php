@@ -28,6 +28,7 @@ Route::prefix('v4')->controller(AuthController::class)->group(function () {
     Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/auth/verify-email/{email}', 'verifyEmail');
     Route::post('/396d6585-16ae-4d04-9549-c499e52b75ea/auth/register', 'register');
     Route::post('/396d6585-16ae-4d04-9549-c499e52b75ea/auth/login', 'login');
+    Route::post('/396d6585-16ae-4d04-9549-c499e52b75ea/auth/logout', 'logout');
 });
 
 
@@ -115,4 +116,7 @@ Route::middleware('web', 'auth')->group(function () {
 
 Route::get('/login', function () {
     return view('auth.login');
+});
+Route::get('/register', function () {
+    return view('auth.register');
 });
