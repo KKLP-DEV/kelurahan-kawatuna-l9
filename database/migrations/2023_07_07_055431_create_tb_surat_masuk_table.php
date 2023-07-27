@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignId('id_jenis_surat')->constrained('tb_jenis_surat');
             $table->string('file_surat');
             $table->string('asal_surat');
+            $table->text('perihal');
             $table->timestamps();
         });
     }
