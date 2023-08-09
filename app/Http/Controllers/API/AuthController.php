@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
+    public function getDataUser()
+    {
+        $user = Auth::user();
+        $data = User::where('uuid', $user->uuid)->first();
+        return response()->json([
+            'code' => 200,
+            'message' => 'success get data user',
+            'data' => $data
+        ]);
+    }
+
     public function register(Request $request)
     {
         $validation = Validator::make(
@@ -34,7 +46,7 @@ class AuthController extends Controller
                 'password_confirmation.same' => 'Konfirmasi password harus sama dengan password'
             ]
         );
-        
+
 
         if ($validation->fails()) {
             return response()->json([
@@ -56,8 +68,6 @@ class AuthController extends Controller
             $this->sendVerificationEmail($data);
 
             $token = $data->createToken('auth_token')->plainTextToken;
-            
-
         } catch (\Throwable $th) {
             return response()->json([
                 'code' => 400,
@@ -156,9 +166,62 @@ class AuthController extends Controller
         return $token->accessToken->created_at->addMinutes($expirationMinutes)->isFuture();
     }
 
-    public function logout()
+    public function changePassword(Request $request)
     {
-        auth()->user()->tokens()->delete();
+        $validation = Validator::make($request->all(), [
+            'password_old' => 'required',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+    
+        if ($validation->fails()) {
+            return response()->json([
+                'code' => 422,
+                'message' => 'check your validation',
+                'errors' => $validation->errors()
+            ]);
+        }
+    
+        try {
+            $user = User::find(Auth::id());
+    
+            if (!Hash::check($request->password_old, $user->password)) {
+                return response()->json([
+                    'code' => 404,
+                    'message' => 'Password lama salah'
+                ]);
+            }
+    
+            $user->password = Hash::make($request->input('password'));
+            $user->save();
+    
+            $request->user('web')->tokens()->delete();
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+    
+            return response()->json([
+                'code' => 200,
+                'message' => 'success update password and logout',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'code' => 400,
+                'message' => 'failed',
+                'errors' => $th->getMessage()
+            ]);
+        }
+    }
+    
+
+    public function logout(Request $request)
+    {
+        $request->user('web')->tokens()->delete();
+
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return response()->json([
             'code' => 200,
             'message' => 'sucess logout and delete token access'
