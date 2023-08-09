@@ -36,7 +36,7 @@
 
 
                     </div>
-                    <div class="row mb-3">
+                    <div class=" mb-3">
                         @yield('content')
                     </div>
                 </div>

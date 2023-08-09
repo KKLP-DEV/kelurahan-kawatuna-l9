@@ -77,6 +77,15 @@
          </div>
      </li>
 
+     <hr class="sidebar-divider">
+     <li class="nav-item  {{ request()->is('cms/setting') ? 'active' : '' }}">
+        <a class="nav-link " href="{{ url('cms/setting') }}" data-target="#collapsePage" aria-expanded="true"
+            aria-controls="collapsePage">
+            <i class="fa-solid fa-upload"></i>
+            <span>Setting</span>
+        </a>
+    </li>
+
 
      <hr class="sidebar-divider">
      <!-- Logout -->

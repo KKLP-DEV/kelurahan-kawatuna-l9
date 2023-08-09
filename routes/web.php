@@ -38,6 +38,10 @@ Route::middleware('web', 'auth')->group(function () {
         return view('backend.dashboard');
     });
 
+    Route::get('/cms/setting', function () {
+        return view('backend.setting');
+    });
+
     Route::get('/cms/tahun', function () {
         return view('backend.tahun');
     });
@@ -111,6 +115,9 @@ Route::middleware('web', 'auth')->group(function () {
 
     Route::get('/dashboard/get/count', [DashboardController::class, 'countData']);
     Route::get('/profile/get/', [ProfileController::class, 'getProfile']);
+
+    Route::Post('/change-password' , [AuthController::class, 'changePassword']);
+    Route::get('/get/user' , [AuthController::class, 'getDataUser']);
 });
 
 
