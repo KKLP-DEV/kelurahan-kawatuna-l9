@@ -88,7 +88,7 @@ class SuratMasukController extends Controller
                 'tanggal_surat' => 'required|date',
                 'id_tahun' => 'required',
                 'id_jenis_surat' => 'required',
-                'file_surat' => 'required|mimes:pdf,jpg,jpeg,png,doc,docx,xls',
+                'file_surat' => 'required|mimes:pdf,jpg,jpeg,png,doc,docx,xls,xlsx',
                 'asal_surat' => 'required',
                 'perihal' => 'required'
             ],
@@ -99,7 +99,7 @@ class SuratMasukController extends Controller
                 'id_tahun.required' => 'Form Tahun tidak boleh kosong',
                 'id_jenis_surat.required' => 'Form Jenis surat tidak boleh kosong',
                 'file_surat.required' => 'Form file tidak boleh kosong',
-                'file_surat.mimes' => 'File harus dalam format pdf, jpg, atau jpeg',
+                'file_surat.mimes' => 'File harus dalam format yang di dukung',
                 'asal_surat.required' => 'Form asal surat tidak boleh kosong',
                 'nomor_surat.unique' => 'Nomor surat sudah ada sebelumnya',
                 'perihal.required' => 'Form perihal tidak boleh kosong'
@@ -192,7 +192,7 @@ class SuratMasukController extends Controller
                 'tanggal_surat' => 'required|date',
                 'id_tahun' => 'required',
                 'id_jenis_surat' => 'required',
-                'file_surat' => 'mimes:pdf,jpg,jpeg,png,doc,docx,xls',
+                'file_surat' => 'mimes:pdf,jpg,jpeg,png,doc,docx,xls,xlsx',
                 'asal_surat' => 'required',
                 'perihal' => 'required'
             ],
@@ -202,7 +202,7 @@ class SuratMasukController extends Controller
                 'tanggal_surat.date' => 'Format harus tanggal',
                 'id_tahun.required' => 'Form Tahun tidak boleh kosong',
                 'id_jenis_surat.required' => 'Form Jenis surat tidak boleh kosong',
-                'file_surat.mimes' => 'File harus dalam format pdf, jpg, atau jpeg',
+                'file_surat.mimes' => 'File harus dalam format yang didukung',
                 'asal_surat.required' => 'Form asal surat tidak boleh kosong',
                 'perihal.required' => 'Form perihal tidak boleh kosong'
             ]

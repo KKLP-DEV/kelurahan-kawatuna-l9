@@ -41,7 +41,9 @@
         </div>
     </div>
     <div class="login-card">
-        <img src="{{ asset('img/logo1.png') }}" style="max-width: 150px" alt=""><br><br><br>
+        <div class="header">
+            <h2>Login</h2><br><br>
+        </div>
         <div id="error-message" class="error-message"></div>
         <div id="success-message" class="success-message" style="display: none;"></div>
         <form class="login-form" id="login-form">
