@@ -160,9 +160,9 @@ class AuthController extends Controller
         $expirationMinutes = config('sanctum.expiration');
 
         if ($expirationMinutes === null) {
-            return true; // Token tidak kedaluwarsa jika tidak ada batasan waktu
+            return true; 
         }
-        // Periksa apakah waktu pembuatan token ditambah dengan waktu kedaluwarsa masih lebih besar dari waktu saat ini
+     
         return $token->accessToken->created_at->addMinutes($expirationMinutes)->isFuture();
     }
 
