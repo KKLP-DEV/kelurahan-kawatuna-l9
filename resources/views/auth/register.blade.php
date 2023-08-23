@@ -29,41 +29,46 @@
             margin-bottom: 10px;
         }
     </style>
-
     <div id="loading-overlay" class="loading-overlay" style="display: none;">
         <div id="loading" class="loading">
             <img src="{{ asset('img/loader.gif') }}" alt="Loading..." />
         </div>
     </div>
-    <div class="login-card">
-      <div class="header">
-        <h2>Register</h2><br><br>
-      </div>
-        <div id="error-message" class="error-message"></div>
-        <form class="login-form" id="registration-form">
-            @csrf
-            <div class="form-group">
-                <input type="text" class="form-control" name="name" id="name" placeholder="Nama">
+    <div class="register-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <h2>Register</h2>
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+            <div class="card-body">
+                <form method="post" id="registration-form">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="text" name="name" id="name" class="form-control" placeholder="Full name">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
+                            placeholder="Password Confirmation">
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-primary btn-block">Register</button>
+                    </div>
+                </form>
+                <a href="{{ url('login') }}" class="text-center">Sudah punya akun</a>
             </div>
-            <div class="form-group">
-                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation"
-                    placeholder="Password">
-            </div>
-            <button>Register</button>
-            <a href="{{ url('/login') }}">Login</a>
-        </form>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
     </div>
-
+    <!-- /.login-box -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
-        $(function() {
+           $(function() {
             $('#registration-form').submit(function(event) {
                 event.preventDefault();
                 var name = $('#name').val();

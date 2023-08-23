@@ -7,8 +7,6 @@ use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\SuratKeluarController;
 use App\Http\Controllers\API\SuratMasukController;
 use App\Http\Controllers\API\TahunController;
-use App\Models\JenisDokumenModel;
-use App\Models\JenisSuratModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +30,18 @@ Route::prefix('v4')->controller(AuthController::class)->group(function () {
 });
 
 
+Route::middleware('guest')->group(function () {
+    Route::get('/login', function () {
+        return view('auth.login');
+    });
+});
 
-Route::middleware('web', 'auth')->group(function () {
+
+
+
+
+
+Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('backend.dashboard');
     });
@@ -69,8 +77,6 @@ Route::middleware('web', 'auth')->group(function () {
     Route::get('/cms/surat/keluar', function () {
         return view('backend.surat-keluar');
     });
-
-
 
     //tahun arsip
     Route::prefix('v1')->controller(TahunController::class)->group(function () {
@@ -116,14 +122,11 @@ Route::middleware('web', 'auth')->group(function () {
     Route::get('/dashboard/get/count', [DashboardController::class, 'countData']);
     Route::get('/profile/get/', [ProfileController::class, 'getProfile']);
 
-    Route::Post('/change-password' , [AuthController::class, 'changePassword']);
-    Route::get('/get/user' , [AuthController::class, 'getDataUser']);
+    Route::Post('/change-password', [AuthController::class, 'changePassword']);
+    Route::get('/get/user', [AuthController::class, 'getDataUser']);
 });
 
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
 Route::get('/register', function () {
     return view('auth.register');
 });

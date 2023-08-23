@@ -113,7 +113,6 @@
                  },
                  success: function(response) {
                      console.log(response.message);
-                     localStorage.removeItem('access_token');
                      window.location.href = '/login';
                  },
                  error: function(xhr, status, error) {
