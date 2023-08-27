@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{ asset('pena.png') }}" rel="icon">
+    <link href="{{ asset('img/favicon_palukota.png') }}" rel="icon">
     <title>Kelurahan Kawatuna</title>
     <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css ') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">

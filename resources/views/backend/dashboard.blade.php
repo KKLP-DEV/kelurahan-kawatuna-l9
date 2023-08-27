@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-sm-5 text-center text-sm-left">
                         <div class="card-body pb-0 px-0 px-md-4">
-                            <img class="mb-4" src="{{ asset('img/logo1.png') }}"
+                            <img class="mb-4" src="{{ asset('img/favicon_palukota.png') }}"
                                 height="350">        
                         </div>
                     </div>

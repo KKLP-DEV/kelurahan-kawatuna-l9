@@ -2,7 +2,7 @@
  <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
          <div class="sidebar-brand-icon">
-             <img src="{{ asset('img/logo1.png') }}">
+             <img src="{{ asset('img/favicon_palukota.png') }}">
          </div>
          <div class="sidebar-brand-text">Kelurahan Kawatuna</div>
      </a>
@@ -81,7 +81,7 @@
      <li class="nav-item  {{ request()->is('cms/setting') ? 'active' : '' }}">
         <a class="nav-link " href="{{ url('cms/setting') }}" data-target="#collapsePage" aria-expanded="true"
             aria-controls="collapsePage">
-            <i class="fa-solid fa-upload"></i>
+            <i class="fa-solid fa-gear"></i>
             <span>Setting</span>
         </a>
     </li>

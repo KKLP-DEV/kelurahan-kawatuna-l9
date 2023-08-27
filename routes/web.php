@@ -52,13 +52,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cms/tahun', function () {
         return view('backend.tahun');
-    });
+    })->middleware('adminlevel:1');
+
     Route::get('/cms/surat/masuk', function () {
         return view('backend.surat-masuk');
     });
     Route::get('/cms/jenis/surat', function () {
         return view('backend.jenis-surat');
-    });
+    })->middleware('adminlevel:1');;
 
     Route::get('/cms/arsip/surat/masuk/get/{id}', function () {
         return view('backend.arsip');

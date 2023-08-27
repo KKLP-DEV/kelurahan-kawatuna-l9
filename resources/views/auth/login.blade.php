@@ -1,91 +1,64 @@
 @extends('Layouts.loginBase')
 @section('content')
-<style>
-    /* Add the CSS for the loading overlay */
-    .loading-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 9999;
-        display: none;
-    }
+    <style>
+        /* Add the CSS for the loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: none;
+        }
 
-    .loading {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
-    .loading img {
-        max-width: 100px;
-    }
+        .loading img {
+            max-width: 100px;
+        }
 
-    .error-message {
-        color: red;
-        margin-bottom: 10px;
-    }
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
 
-    .success-message {
-        color: green;
-        margin-bottom: 10px;
-    }
-</style>
+        .success-message {
+            color: green;
+            margin-bottom: 10px;
+        }
+    </style>
 
-<div id="loading-overlay" class="loading-overlay" style="display: none;">
-    <div id="loading" class="loading">
-        <img src="{{ asset('img/loader.gif') }}" alt="Loading..." />
-    </div>
-</div>
-<div class="login-box">
-    <!-- /.login-logo -->
-    <div class="card card-outline card-primary">
-        <div class="card-header text-center">
-            <P class="h1"><b>KAWATUNA</b></P>
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div id="loading" class="loading">
+            <img src="{{ asset('img/loader.gif') }}" alt="Loading..." />
         </div>
-        <div class="card-body">
-            <div id="error-message" class="error-message"></div>
-            <div id="success-message" class="success-message" style="display: none;"></div>
-            <form method="post" id="login-form">
-                @csrf
-                <div class="input-group mb-3">
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email">
-                    <div class="input-group-append">
-                    </div>
-                </div>
-                <div class="input-group mb-3">
-                    <input type="password" name="password" id="password" class="form-control"
-                        placeholder="Password">
-                </div>
-                <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">
-                                Remember Me
-                            </label>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                    </div>
-                    <!-- /.col -->
-                </div>
-            </form>
-            <!-- /.social-auth-links -->
-
-            <p class="mb-0">
-                <a href="{{ url('/register') }}" class="text-center">Registrasi</a>
-            </p>
-        </div>
-        <!-- /.card-body -->
     </div>
-    <!-- /.card -->
-</div>
+    <div class="login-card">
+        <div class="header">
+            <h2>Login</h2><br><br>
+        </div>
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message" style="display: none;"></div>
+        <form class="login-form" id="login-form">
+            @csrf
+            <div class="form-group">
+                <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            </div>
+            <button>Login</button>
+        </form>
+        <br>
+        <a href="{{ url('/register') }}">Register</a>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -99,7 +72,7 @@
                 successMessage.hide();
 
                 var formData = new FormData(this);
-          
+
 
                 $('#loading-overlay').show();
                 $.ajax({
@@ -108,7 +81,7 @@
                     data: formData,
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     dataType: 'JSON',
-                    
+
                     contentType: false,
                     processData: false,
                     success: function(data) {
