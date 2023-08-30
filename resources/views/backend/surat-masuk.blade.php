@@ -53,7 +53,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formTambah" method="POST" enctype="multipart/form-data">
+                    <form id="formTambah" class="info" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="uuid">
                         <div class="form-group">
@@ -90,8 +90,7 @@
                         </div>
                         <div class="form-group">
                             <label for="perihal"> Perihal</label>
-                            <textarea type="text" class="form-control" name="perihal" id="perihal"
-                                placeholder="Input Here" rows="3"> </textarea>
+                            <textarea type="text" class="form-control" name="perihal" id="perihal" placeholder="Input Here" rows="3"> </textarea>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -157,8 +156,8 @@
                         </div>
                         <div class="form-group">
                             <label for="perihal"> Perihal</label>
-                            <textarea type="text" class="form-control" name="perihal" id="eperihal"
-                                placeholder="Input Here" rows="3"> </textarea>
+                            <textarea type="text" class="form-control" name="perihal" id="eperihal" placeholder="Input Here"
+                                rows="3"> </textarea>
                         </div>
 
                     </form>
@@ -313,8 +312,8 @@
                                 title: 'Success',
                                 text: 'Data Success Create',
                                 icon: 'success',
-                                showCancelButton: false,
-                                confirmButtonText: 'OK'
+                                confirmButtonText: 'OK',
+                                showConfirmButton: true
                             }).then(function() {
                                 location.reload();
                             });
@@ -340,7 +339,14 @@
                     }
                 });
             });
+
+            $(document).on('keydown', function(e) {
+                if (e.which === 13 && $('.swal2-modal').is(':visible')) {
+                    $('.swal2-confirm').click();
+                }
+            });
         });
+
 
         //edit
         $(document).on('click', '.edit-modal', function() {
@@ -356,7 +362,7 @@
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
-                    console.log('get id disini => ' , data);
+                    console.log('get id disini => ', data);
                     $('#uuid').val(data.data.uuid);
                     $('#enomor_surat').val(stripHtmlTags(data.data.nomor_surat));
                     $('#etanggal_surat').val((data.data.tanggal_surat));
@@ -457,6 +463,13 @@
                             timer: 5000,
                             showConfirmButton: true
                         });
+                    }
+                });
+                
+
+                $(document).on('keydown', function(e) {
+                    if (e.which === 13 && $('.swal2-modal').is(':visible')) {
+                        $('.swal2-confirm').click();
                     }
                 });
             });

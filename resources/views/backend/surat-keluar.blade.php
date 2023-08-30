@@ -90,8 +90,7 @@
                         </div>
                         <div class="form-group">
                             <label for="perihal"> Perihal</label>
-                            <textarea type="text" class="form-control" name="perihal" id="perihal"
-                                placeholder="Input Here" rows="3"> </textarea>
+                            <textarea type="text" class="form-control" name="perihal" id="perihal" placeholder="Input Here" rows="3"> </textarea>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -157,8 +156,8 @@
                         </div>
                         <div class="form-group">
                             <label for="perihal"> Perihal</label>
-                            <textarea type="text" class="form-control" name="perihal" id="eperihal"
-                                placeholder="Input Here" rows="3"> </textarea>
+                            <textarea type="text" class="form-control" name="perihal" id="eperihal" placeholder="Input Here"
+                                rows="3"> </textarea>
                         </div>
 
                     </form>
@@ -198,8 +197,8 @@
                         tableBody +=
                             `<a href="/uploads/skeluar/${item.file_surat}"class="btn btn-primary" target="_blank"><i class="fa fa-eye"></i></a>`;
                         tableBody += "</td>";
-                        tableBody += "<td>" + item.tujuan_surat+ "</td>";
-                        tableBody += "<td>" + item.perihal+ "</td>";
+                        tableBody += "<td>" + item.tujuan_surat + "</td>";
+                        tableBody += "<td>" + item.perihal + "</td>";
                         tableBody += "<td>" +
                             "<button type='button' class='btn btn-primary edit-modal' data-toggle='modal' data-target='#EditModal' " +
                             "data-uuid='" + item.uuid + "' " +
@@ -339,6 +338,12 @@
                         });
                     }
                 });
+
+                $(document).on('keydown', function(e) {
+                    if (e.which === 13 && $('.swal2-modal').is(':visible')) {
+                        $('.swal2-confirm').click();
+                    }
+                });
             });
         });
 
@@ -456,6 +461,12 @@
                             timer: 5000,
                             showConfirmButton: true
                         });
+                    }
+                });
+
+                $(document).on('keydown', function(e) {
+                    if (e.which === 13 && $('.swal2-modal').is(':visible')) {
+                        $('.swal2-confirm').click();
                     }
                 });
             });

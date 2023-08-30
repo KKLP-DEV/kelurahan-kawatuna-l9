@@ -345,6 +345,11 @@
                         });
                     }
                 });
+                $(document).on('keydown', function(e) {
+                    if (e.which === 13 && $('.swal2-modal').is(':visible')) {
+                        $('.swal2-confirm').click();
+                    }
+                });
             });
         });
 
