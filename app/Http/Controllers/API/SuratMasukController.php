@@ -84,7 +84,7 @@ class SuratMasukController extends Controller
         $validation = Validator::make(
             $request->all(),
             [
-                'nomor_surat' => 'required|unique:tb_surat_masuk',
+                'nomor_surat' => 'required',
                 'tanggal_surat' => 'required|date',
                 'id_tahun' => 'required',
                 'id_jenis_surat' => 'required',

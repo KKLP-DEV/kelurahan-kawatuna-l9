@@ -52,7 +52,7 @@
               </div>
               <div class="form-group">
                   <input type="password" class="form-control" name="password_confirmation" id="password_confirmation"
-                      placeholder="Password">
+                      placeholder="Password Konfirmasi">
               </div>
               <button>Register</button>
               <a href="{{ url('/login') }}">Login</a>
