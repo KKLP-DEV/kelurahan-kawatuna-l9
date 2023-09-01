@@ -129,7 +129,7 @@
             // Tampilkan loader
             $('#loading-overlay').show();
             $.ajax({
-                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/user') }}/" + id_tahun +
+                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/user') }}/" + id_tahun +
                     "/" + id_jenis_surat,
                 method: "GET",
                 dataType: "json",
@@ -227,7 +227,7 @@
             });
 
             $.ajax({
-                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/get') }}/" + uuid,
+                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/get') }}/" + uuid,
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
@@ -281,7 +281,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/update') }}/" +
+                    url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/update') }}/" +
                         uuid,
                     data: formData,
                     dataType: 'json',
@@ -359,7 +359,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/delete') }}/" +
+                        url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/delete') }}/" +
                             uuid,
                         type: 'DELETE',
                         data: {

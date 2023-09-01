@@ -8,7 +8,7 @@
     <div class="col-lg-12">
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Surat Masuk</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Arsip</h6>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AuthorModal"
                     id="#myBtn">
                     Tambah Data
@@ -167,7 +167,7 @@
         $(document).ready(function() {
             $('#loading-overlay').show();
             $.ajax({
-                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk') }}",
+                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip') }}",
                 method: "GET",
                 dataType: "json",
                 success: function(response) {
@@ -273,7 +273,7 @@
                 $('#loading-overlay').show();
                 $.ajax({
                     type: 'POST',
-                    url: '{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/create') }}',
+                    url: '{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/create') }}',
                     data: formData,
                     dataType: 'JSON',
                     contentType: false,
@@ -346,7 +346,7 @@
             });
 
             $.ajax({
-                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/get') }}/" + uuid,
+                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/get') }}/" + uuid,
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
@@ -398,7 +398,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/update') }}/" +
+                    url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/update') }}/" +
                         uuid,
                     data: formData,
                     dataType: 'json',
@@ -476,7 +476,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/delete') }}/" +
+                        url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/delete') }}/" +
                             uuid,
                         type: 'DELETE',
                         data: {

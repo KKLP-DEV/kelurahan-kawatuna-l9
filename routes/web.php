@@ -4,8 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\JenisSuratController;
 use App\Http\Controllers\API\ProfileController;
-use App\Http\Controllers\API\SuratKeluarController;
-use App\Http\Controllers\API\SuratMasukController;
+use App\Http\Controllers\API\SuratController;
 use App\Http\Controllers\API\TahunController;
 use Illuminate\Support\Facades\Route;
 
@@ -89,15 +88,15 @@ Route::middleware('auth')->group(function () {
         Route::delete('/396d6585-16ae-4d04-9549-c499e52b75ea/jenis/surat/delete/{uuid}', 'deleteData');
     });
 
-    //surat masuk 
-    Route::prefix('v3')->controller(SuratMasukController::class)->group(function () {
-        Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk', 'getAllData');
-        Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/user/{id_tahun}/{id_jenis_surat}', 'getDataByUser');
-        // Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/get/{id_tahun}/{id_jenis_surat}', 'getDataByTahunAndJenisSurat');
-        Route::post('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/create', 'createData');
-        Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/get/{uuid}', 'getDataByUuid');
-        Route::post('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/update/{uuid}', 'updateDataByUuid');
-        Route::delete('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/delete/{uuid}', 'deleteData');
+    //surat arsip 
+    Route::prefix('v3')->controller(SuratController::class)->group(function () {
+        Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip', 'getAllData');
+        Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/user/{id_tahun}/{id_jenis_surat}', 'getDataByUser');
+        // Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/get/{id_tahun}/{id_jenis_surat}', 'getDataByTahunAndJenisSurat');
+        Route::post('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/create', 'createData');
+        Route::get('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/get/{uuid}', 'getDataByUuid');
+        Route::post('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/update/{uuid}', 'updateDataByUuid');
+        Route::delete('/396d6585-16ae-4d04-9549-c499e52b75ea/surat-arsip/delete/{uuid}', 'deleteData');
     });
 
 

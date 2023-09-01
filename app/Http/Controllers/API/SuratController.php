@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\SuratMasukModel;
+use App\Models\SuratModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
 
-class SuratMasukController extends Controller
+class SuratController extends Controller
 {
     public function getAllData()
     {
@@ -21,7 +21,7 @@ class SuratMasukController extends Controller
         $user = Auth::user();
 
         if ($user->role == 2) {
-            $data = SuratMasukModel::with('tahun', 'jenis_surat', 'users')
+            $data = SuratModel::with('tahun', 'jenis_surat', 'users')
                 ->where('id_user', $user->id)
                 ->get();
 
@@ -31,7 +31,7 @@ class SuratMasukController extends Controller
                 'data' => $data
             ]);
         } elseif ($user->role == 1) {
-            $admin = SuratMasukModel::with('tahun', 'jenis_surat', 'users')->get();
+            $admin = SuratModel::with('tahun', 'jenis_surat', 'users')->get();
             return response()->json([
                 'code' => 200,
                 'message' => 'success get all data',
@@ -45,7 +45,7 @@ class SuratMasukController extends Controller
         try {
             $user = Auth::user();
             if ($user->role == 2) {
-                $data = SuratMasukModel::with('tahun', 'jenis_surat', 'users')
+                $data = SuratModel::with('tahun', 'jenis_surat', 'users')
                     ->where('id_tahun', $id_tahun)
                     ->where('id_jenis_surat', $id_jenis_surat)
                     ->where('id_user', $user->id)
@@ -57,7 +57,7 @@ class SuratMasukController extends Controller
                     'data' => $data
                 ]);
             } elseif ($user->role == 1) {
-                $admin = SuratMasukModel::with('tahun', 'jenis_surat', 'users')
+                $admin = SuratModel::with('tahun', 'jenis_surat', 'users')
                     ->where('id_tahun', $id_tahun)
                     ->where('id_jenis_surat', $id_jenis_surat)
                     ->get();
@@ -115,7 +115,7 @@ class SuratMasukController extends Controller
 
         try {
             $user = Auth::user();
-            $data = new SuratMasukModel;
+            $data = new SuratModel;
             $data->uuid = Uuid::uuid4()->toString();
             $data->id_user = $user->id;
             $data->nomor_surat = $request->input('nomor_surat');
@@ -157,7 +157,7 @@ class SuratMasukController extends Controller
         }
 
         try {
-            $data = SuratMasukModel::where('uuid', $uuid)->first();
+            $data = SuratModel::where('uuid', $uuid)->first();
             if (!$data) {
                 return response()->json([
                     'code' => 404,
@@ -213,7 +213,7 @@ class SuratMasukController extends Controller
 
         try {
             $user = Auth::user();
-            $data = SuratMasukModel::where('uuid', $uuid)->first();
+            $data = SuratModel::where('uuid', $uuid)->first();
             $data->id_user =  $user->id;
             $data->nomor_surat = $request->input('nomor_surat');
             $data->tanggal_surat = $request->input('tanggal_surat');
@@ -258,7 +258,7 @@ class SuratMasukController extends Controller
         }
 
         try {
-            $data = SuratMasukModel::where('uuid', $uuid)->first();
+            $data = SuratModel::where('uuid', $uuid)->first();
             if (!$data) {
                 return response()->json([
                     'code' => 404,
