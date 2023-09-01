@@ -8,7 +8,7 @@
     <div class="col-lg-12">
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Surat Keluar</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Surat Masuk</h6>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AuthorModal"
                     id="#myBtn">
                     Tambah Data
@@ -23,11 +23,10 @@
                                     <th>No</th>
                                     <th>Yang mengupload</th>
                                     <th>Nomor Surat</th>
-                                    <th>Tanggal Surat Keluar</th>
+                                    <th>Tanggal Masuk Surat</th>
                                     <th>Tahun Arsip</th>
                                     <th>Jenis Surat</th>
                                     <th>File</th>
-                                    <th>Tujuan surat</th>
                                     <th>Perihal</th>
                                     <th>Action</th>
                                 </tr>
@@ -53,7 +52,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formTambah" method="POST" enctype="multipart/form-data">
+                    <form id="formTambah" class="info" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="uuid">
                         <div class="form-group">
@@ -62,7 +61,7 @@
                                 placeholder="Input Here..">
                         </div>
                         <div class="form-group">
-                            <label for="tanggal_surat">Tanggal Surat Keluar</label>
+                            <label for="tanggal_surat">Tanggal Masuk Surat</label>
                             <input type="date" class="form-control" name="tanggal_surat" id="tanggal_surat"
                                 placeholder="Input Here">
                         </div>
@@ -82,11 +81,6 @@
                             <label for="file_surat">File</label>
                             <input type="file" class="form-control" name="file_surat" id="file_surat">
                             <p>Format: Jpg,jpeg,png,doc,docx,xls</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="tujuan_surat"> Tujuan Surat</label>
-                            <input type="text" class="form-control" name="tujuan_surat" id="tujuan_surat"
-                                placeholder="Input Here">
                         </div>
                         <div class="form-group">
                             <label for="perihal"> Perihal</label>
@@ -123,7 +117,7 @@
                                 placeholder="Input Here..">
                         </div>
                         <div class="form-group">
-                            <label for="tanggal_surat">Tanggal Surat Keluar</label>
+                            <label for="tanggal_surat">Tanggal Masuk Surat</label>
                             <input type="date" class="form-control" name="tanggal_surat" id="etanggal_surat"
                                 placeholder="Input Here">
                         </div>
@@ -150,11 +144,6 @@
                                 style="max-width: 200px; padding-top: 23px">
                         </div>
                         <div class="form-group">
-                            <label for="tujuan_surat"> Tujuan Surat</label>
-                            <input type="text" class="form-control" name="tujuan_surat" id="etujuan_surat"
-                                placeholder="Input Here">
-                        </div>
-                        <div class="form-group">
                             <label for="perihal"> Perihal</label>
                             <textarea type="text" class="form-control" name="perihal" id="eperihal" placeholder="Input Here"
                                 rows="3"> </textarea>
@@ -178,7 +167,7 @@
         $(document).ready(function() {
             $('#loading-overlay').show();
             $.ajax({
-                url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar') }}",
+                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk') }}",
                 method: "GET",
                 dataType: "json",
                 success: function(response) {
@@ -195,9 +184,8 @@
                         tableBody += "<td>" + item.jenis_surat.jenis_surat + "</td>";
                         tableBody += "<td>";
                         tableBody +=
-                            `<a href="/uploads/skeluar/${item.file_surat}"class="btn btn-primary" target="_blank"><i class="fa fa-eye"></i></a>`;
+                            `<a href="/uploads/smasuk/${item.file_surat}"class="btn btn-primary" target="_blank"><i class="fa fa-eye"></i></a>`;
                         tableBody += "</td>";
-                        tableBody += "<td>" + item.tujuan_surat + "</td>";
                         tableBody += "<td>" + item.perihal + "</td>";
                         tableBody += "<td>" +
                             "<button type='button' class='btn btn-primary edit-modal' data-toggle='modal' data-target='#EditModal' " +
@@ -285,7 +273,7 @@
                 $('#loading-overlay').show();
                 $.ajax({
                     type: 'POST',
-                    url: '{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/create') }}',
+                    url: '{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/create') }}',
                     data: formData,
                     dataType: 'JSON',
                     contentType: false,
@@ -312,8 +300,8 @@
                                 title: 'Success',
                                 text: 'Data Success Create',
                                 icon: 'success',
-                                showCancelButton: false,
-                                confirmButtonText: 'OK'
+                                confirmButtonText: 'OK',
+                                showConfirmButton: true
                             }).then(function() {
                                 location.reload();
                             });
@@ -338,14 +326,15 @@
                         });
                     }
                 });
+            });
 
-                $(document).on('keydown', function(e) {
-                    if (e.which === 13 && $('.swal2-modal').is(':visible')) {
-                        $('.swal2-confirm').click();
-                    }
-                });
+            $(document).on('keydown', function(e) {
+                if (e.which === 13 && $('.swal2-modal').is(':visible')) {
+                    $('.swal2-confirm').click();
+                }
             });
         });
+
 
         //edit
         $(document).on('click', '.edit-modal', function() {
@@ -357,19 +346,19 @@
             });
 
             $.ajax({
-                url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/get') }}/" + uuid,
+                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/get') }}/" + uuid,
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
+                    console.log('get id disini => ', data);
                     $('#uuid').val(data.data.uuid);
                     $('#enomor_surat').val(stripHtmlTags(data.data.nomor_surat));
                     $('#etanggal_surat').val((data.data.tanggal_surat));
                     $('#efile_surat').html(data.data.file_surat);
-                    $('#preview').attr('src', "{{ asset('uploads/skeluar') }}/" + data.data
+                    $('#preview').attr('src', "{{ asset('uploads/smasuk') }}/" + data.data
                         .file_surat);
                     $('#eid_jenis_surat').val(stripHtmlTags(data.data.id_jenis_surat));
                     $('#eid_tahun').val(data.data.id_tahun);
-                    $('#etujuan_surat').val(stripHtmlTags(data.data.tujuan_surat));
                     $('#eperihal').val(stripHtmlTags(data.data.perihal));
                     // Tampilkan nama file gambar pada label
                     var fileName = data.data.file_surat.split('/').pop();
@@ -409,7 +398,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/update') }}/" +
+                    url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/update') }}/" +
                         uuid,
                     data: formData,
                     dataType: 'json',
@@ -463,6 +452,7 @@
                         });
                     }
                 });
+                
 
                 $(document).on('keydown', function(e) {
                     if (e.which === 13 && $('.swal2-modal').is(':visible')) {
@@ -486,7 +476,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/delete') }}/" +
+                        url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/delete') }}/" +
                             uuid,
                         type: 'DELETE',
                         data: {

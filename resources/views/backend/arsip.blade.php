@@ -58,7 +58,7 @@
                         tableBody += "<tr>";
                         tableBody += "<td>" + (index + 1) + "</td>";
                         tableBody += "<td>" + item.jenis_surat + "</td>";
-                        tableBody += "<td><a href='{{ url('cms/arsip/surat/masuk/get/data') }}/" + id_tahun + "/" + item.id + "' class='btn btn-primary'><i class='fa-solid fa-eye'></i> View</a></td>";
+                        tableBody += "<td><a href='{{ url('cms/arsip/surat/get/data') }}/" + id_tahun + "/" + item.id + "' class='btn btn-primary'><i class='fa-solid fa-eye'></i> View</a></td>";
                         tableBody += "</tr>";
                     });
                     $("#tableBody").html(tableBody);

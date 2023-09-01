@@ -34,45 +34,24 @@
              </a>
          </li>
      @endif
-     <li class="nav-item  {{ request()->is('cms/surat/masuk') ? 'active' : '' }}">
-         <a class="nav-link " href="{{ url('cms/surat/masuk') }}" data-target="#collapsePage" aria-expanded="true"
+     <li class="nav-item  {{ request()->is('cms/surat') ? 'active' : '' }}">
+         <a class="nav-link " href="{{ url('cms/surat') }}" data-target="#collapsePage" aria-expanded="true"
              aria-controls="collapsePage">
              <i class="fa-solid fa-download"></i>
-             <span>Surat Masuk</span>
-         </a>
-     </li>
-     <li class="nav-item  {{ request()->is('cms/surat/keluar') ? 'active' : '' }}">
-         <a class="nav-link " href="{{ url('cms/surat/keluar') }}" data-target="#collapsePage" aria-expanded="true"
-             aria-controls="collapsePage">
-             <i class="fa-solid fa-upload"></i>
-             <span>Surat Keluar</span>
+             <span>Buat Arsip </span>
          </a>
      </li>
      <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSuratMasuk"
              aria-expanded="false" aria-controls="collapseSuratMasuk">
              <i class="fa-solid fa-box-archive"></i>
-             <span>Data Arsip Surat Masuk</span>
+             <span>Data Arsip Surat </span>
          </a>
          <div id="collapseSuratMasuk" class="collapse" aria-labelledby="headingSuratMasuk"
              data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  <h6 class="collapse-header">Arsip Tahun</h6>
                  <div id="dropdownContent"></div>
-             </div>
-         </div>
-     </li>
-     <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSuratKeluar"
-             aria-expanded="false" aria-controls="collapseSuratKeluar">
-             <i class="fa-solid fa-box-archive"></i>
-             <span>Data Arsip Surat Keluar</span>
-         </a>
-         <div id="collapseSuratKeluar" class="collapse" aria-labelledby="headingSuratKeluar"
-             data-parent="#accordionSidebar">
-             <div class="bg-white py-2 collapse-inner rounded">
-                 <h6 class="collapse-header">Arsip Tahun</h6>
-                 <div id="dropdownContents"></div>
              </div>
          </div>
      </li>
@@ -133,8 +112,7 @@
                  var dropdownContent = "";
                  response.data.forEach(function(data) {
                      dropdownContent +=
-                         '<a class="collapse-item" href="{{ url('cms/arsip/surat') }}/' +
-                         urlSegment +
+                         '<a class="collapse-item" href="{{ url('cms/arsip/surat') }}' +
                          '/get/' + data.id +
                          '">' +
                          data.tahun +

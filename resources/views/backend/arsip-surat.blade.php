@@ -19,11 +19,10 @@
                                     <th>No</th>
                                     <th>Yang mengupload</th>
                                     <th>Nomor Surat</th>
-                                    <th>Tanggal surat keluar</th>
+                                    <th>Tanggal surat masuk</th>
                                     <th>Tahun Arsip</th>
                                     <th>Jenis surat</th>
                                     <th>File surat</th>
-                                    <th>Asal surat</th>
                                     <th>Perihal</th>
                                     <th>Action</th>
                                 </tr>
@@ -44,7 +43,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="EditModalLabel">Edit Modal</h5>
+                    <h5 class="modal-title" id="EditModalLabel">Edit Scholarship</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -86,11 +85,6 @@
                                 style="max-width: 200px; padding-top: 23px">
                         </div>
                         <div class="form-group">
-                            <label for="tujuan_surat"> Tujuan Surat</label>
-                            <input type="text" class="form-control" name="tujuan_surat" id="etujuan_surat"
-                                placeholder="Input Here">
-                        </div>
-                        <div class="form-group">
                             <label for="perihal"> Perihal</label>
                             <textarea type="text" class="form-control" name="perihal" id="eperihal"
                                 placeholder="Input Here" rows="3"> </textarea>
@@ -130,19 +124,18 @@
 
         $(document).ready(function() {
             var url = new URL(window.location.href);
-            var id_tahun = url.pathname.split('/')[7];
-            var id_jenis_surat = url.pathname.split('/')[8];
-            console.log(id_tahun , id_jenis_surat);
+            var id_tahun = url.pathname.split('/')[6];
+            var id_jenis_surat = url.pathname.split('/')[7];
             // Tampilkan loader
             $('#loading-overlay').show();
             $.ajax({
-                url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/user') }}/" + id_tahun +
+                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/user') }}/" + id_tahun +
                     "/" + id_jenis_surat,
                 method: "GET",
                 dataType: "json",
                 success: function(response) {
                     $('#loading-overlay').hide();
-                    console.log('surat->keluara : ' ,response);
+                    console.log('surat masuk => ' , response);
                     var tableBody = "";
                     $.each(response.data, function(index, item) {
                         tableBody += "<tr>";
@@ -154,10 +147,9 @@
                         tableBody += "<td>" + item.jenis_surat.jenis_surat + "</td>";
                         tableBody += "<td>";
                         tableBody +=
-                            `<a href="/uploads/skeluar/${item.file_surat}" class="btn btn-primary" target="_blank"><i class="fa fa-eye"></i></a>`;
+                            `<a href="/uploads/smasuk/${item.file_surat}" class="btn btn-primary" target="_blank"><i class="fa fa-eye"></i></a>`;
                         tableBody += "</td>";
-                        tableBody += "<td>" + item.tujuan_surat + "</td>";
-                        tableBody += "<td>" + item.perihal+ "</td>";
+                        tableBody += "<td>" + item.perihal + "</td>";
                         tableBody += "<td>" +
                             "<button type='button' class='btn btn-primary edit-modal' data-toggle='modal' data-target='#EditModal' " +
                             "data-uuid='" + item.uuid + "' " +
@@ -235,7 +227,7 @@
             });
 
             $.ajax({
-                url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/get') }}/" + uuid,
+                url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/get') }}/" + uuid,
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
@@ -248,7 +240,6 @@
                         .file_surat);
                     $('#eid_jenis_surat').val(stripHtmlTags(data.data.id_jenis_surat));
                     $('#eid_tahun').val(data.data.id_tahun);
-                    $('#etujuan_surat').val(stripHtmlTags(data.data.tujuan_surat));
                     $('#eperihal').val(stripHtmlTags(data.data.perihal));
                     // Tampilkan nama file gambar pada label
                     var fileName = data.data.file_surat.split('/').pop();
@@ -290,7 +281,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/update') }}/" +
+                    url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/update') }}/" +
                         uuid,
                     data: formData,
                     dataType: 'json',
@@ -368,7 +359,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ url('v4/396d6585-16ae-4d04-9549-c499e52b75ea/surat-keluar/delete') }}/" +
+                        url: "{{ url('v3/396d6585-16ae-4d04-9549-c499e52b75ea/surat-masuk/delete') }}/" +
                             uuid,
                         type: 'DELETE',
                         data: {
