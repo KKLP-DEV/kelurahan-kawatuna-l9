@@ -100,21 +100,21 @@
                                             <div class="form-group">
                                                 <label for="fullName">Password Lama</label>
                                                 <input type="password" class="form-control" name="password_old"
-                                                    id="password_old" placeholder="Enter full name">
+                                                    id="password_old" placeholder="Input here">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="fullName">Password Baru</label>
                                                 <input type="password" class="form-control" name="password"
-                                                    placeholder="Enter full name">
+                                                    placeholder="Input here">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="fullName">Konfirmasi password</label>
                                                 <input type="password" class="form-control" name="password_confirmation"
-                                                    placeholder="Enter full name">
+                                                    placeholder="Input here">
                                             </div>
                                         </div>
                                     </form>

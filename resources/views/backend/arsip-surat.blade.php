@@ -19,7 +19,7 @@
                                     <th>No</th>
                                     <th>Yang mengupload</th>
                                     <th>Nomor Surat</th>
-                                    <th>Tanggal surat masuk</th>
+                                    <th>Tanggal Arsip</th>
                                     <th>Tahun Arsip</th>
                                     <th>Jenis surat</th>
                                     <th>File surat</th>
@@ -58,7 +58,7 @@
                                 placeholder="Input Here..">
                         </div>
                         <div class="form-group">
-                            <label for="tanggal_surat">Tanggal Surat</label>
+                            <label for="tanggal_surat">Tanggal Arsip</label>
                             <input type="date" class="form-control" name="tanggal_surat" id="etanggal_surat"
                                 placeholder="Input Here">
                         </div>
@@ -79,15 +79,14 @@
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="efile_surat" name="file_surat">
                                 <label class="custom-file-label" for="efile_surat" id="efile_surat-label">File </label>
-                                <p>Format: Jpg,jpeg,png,doc,docx,xls</p>
+                                <p>Format: Jpg,jpeg,png,doc,docx,xls,xlsx,pdf</p>
                             </div>
                             <img src="" alt="" id="preview" class="mx-auto d-block pb-2"
                                 style="max-width: 200px; padding-top: 23px">
                         </div>
                         <div class="form-group">
                             <label for="perihal"> Perihal</label>
-                            <textarea type="text" class="form-control" name="perihal" id="eperihal"
-                                placeholder="Input Here" rows="3"> </textarea>
+                            <textarea type="text" class="form-control" name="perihal" id="eperihal" placeholder="Input Here" rows="3"> </textarea>
                         </div>
 
                     </form>
@@ -135,7 +134,7 @@
                 dataType: "json",
                 success: function(response) {
                     $('#loading-overlay').hide();
-                    console.log('surat masuk => ' , response);
+                    console.log('surat masuk => ', response);
                     var tableBody = "";
                     $.each(response.data, function(index, item) {
                         tableBody += "<tr>";

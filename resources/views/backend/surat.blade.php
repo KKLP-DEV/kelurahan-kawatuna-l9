@@ -23,7 +23,7 @@
                                     <th>No</th>
                                     <th>Yang mengupload</th>
                                     <th>Nomor Surat</th>
-                                    <th>Tanggal Masuk Surat</th>
+                                    <th>Tanggal Arsip</th>
                                     <th>Tahun Arsip</th>
                                     <th>Jenis Surat</th>
                                     <th>File</th>
@@ -61,7 +61,7 @@
                                 placeholder="Input Here..">
                         </div>
                         <div class="form-group">
-                            <label for="tanggal_surat">Tanggal Masuk Surat</label>
+                            <label for="tanggal_surat">Tanggal Arsip</label>
                             <input type="date" class="form-control" name="tanggal_surat" id="tanggal_surat"
                                 placeholder="Input Here">
                         </div>
@@ -80,7 +80,7 @@
                         <div class="form-group">
                             <label for="file_surat">File</label>
                             <input type="file" class="form-control" name="file_surat" id="file_surat">
-                            <p>Format: Jpg,jpeg,png,doc,docx,xls</p>
+                            <p>Format: Jpg,jpeg,png,doc,docx,xls,xlsx,pdf</p>
                         </div>
                         <div class="form-group">
                             <label for="perihal"> Perihal</label>
@@ -117,7 +117,7 @@
                                 placeholder="Input Here..">
                         </div>
                         <div class="form-group">
-                            <label for="tanggal_surat">Tanggal Masuk Surat</label>
+                            <label for="tanggal_surat">Tanggal Arsip</label>
                             <input type="date" class="form-control" name="tanggal_surat" id="etanggal_surat"
                                 placeholder="Input Here">
                         </div>
@@ -138,7 +138,7 @@
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="efile_surat" name="file_surat">
                                 <label class="custom-file-label" for="efile_surat" id="efile_surat-label">File </label>
-                                <p>Format: Jpg,jpeg,png,doc,docx,xls</p>
+                                <p>Format: Jpg,jpeg,png,doc,docx,xls,xlsx,pdf</p>
                             </div>
                             <img src="" alt="" id="preview" class="mx-auto d-block pb-2"
                                 style="max-width: 200px; padding-top: 23px">
