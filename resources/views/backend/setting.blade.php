@@ -74,7 +74,7 @@
                                 <div class="account-settings">
                                     <div class="user-profile">
                                         <div class="user-avatar">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                            <img src="{{ asset('admin/img/boy.png') }}"
                                                 alt="Maxwell Admin">
                                         </div>
                                         <h5 class="user-name" id="name"></h5>

@@ -49,16 +49,32 @@ Route::middleware('auth')->group(function () {
         return view('backend.setting');
     });
 
+    Route::post('/cms/setting', function () {
+        return view('backend.setting');
+    });
+
     Route::get('/cms/tahun', function () {
+        return view('backend.tahun');
+    })->middleware('adminlevel:1');
+
+    Route::post('/cms/tahun', function () {
         return view('backend.tahun');
     })->middleware('adminlevel:1');
 
     Route::get('/cms/surat', function () {
         return view('backend.surat');
     });
+    Route::post('/cms/surat', function () {
+        return view('backend.surat');
+    });
+
     Route::get('/cms/jenis/surat', function () {
         return view('backend.jenis-surat');
-    })->middleware('adminlevel:1');;
+    })->middleware('adminlevel:1');
+    
+    Route::post('/cms/jenis/surat', function () {
+        return view('backend.jenis-surat');
+    })->middleware('adminlevel:1');
 
     Route::get('/cms/arsip/surat/get/{id}', function () {
         return view('backend.arsip');
